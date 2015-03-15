@@ -74,7 +74,7 @@ totalsteps <- aggregate(activity$steps, list(date=activity$date), sum)
 ```
 
 2. Histogram of the total number of steps taken each day
-```{r method="asis"}
+```{r result="asis"}
 plot_hist(totalsteps$x)
 png(filename = "hist_totalsteps.png", width = 480, height = 480, units = "px")
 plot_hist(totalsteps$x)
@@ -89,7 +89,7 @@ cal_mean_median(totalsteps$x)
 ### What is the average daily activity pattern?
 
 1. Time series plot of the 5-minute interval and the average number of steps taken, averaged across all days.
-```{r fig.width = 10, method="asis"}
+```{r fig.width = 10, result="asis"}
 meanstep_interval <- aggregate(activity$steps, list(interval=activity$interval), mean, na.rm=TRUE)
 plot_ts(meanstep_interval, "day")
 png(filename = "ts_meanstep_interval.png", width = 480, height = 480, units = "px")
@@ -128,7 +128,7 @@ activity_imputed$steps <- impute_missing(activity_imputed$steps, activity_impute
 ```
 
 4. Histogram of the total number of steps taken each day 
-```{r fig.width=10, method="asis"}
+```{r fig.width=10, result="asis"}
 totalimputedsteps <- aggregate(activity_imputed$steps, list(date=activity_imputed$date), sum)
 plot_hist(totalimputedsteps$x, "(includes imputed values for all the missing steps data)")
 png(filename = "hist_totalimputedsteps.png", width = 480, height = 480, units = "px")
@@ -164,7 +164,7 @@ activity_imputed$wday <- as.factor(ifelse(wday(ymd(activity_imputed$date), label
 
 2. Panel plot containing a time series plot of the 5-minute interval and the average number of steps taken, 
         average across all weekdays days or weekend days.
-```{r method="asis"}
+```{r result="asis"}
 meanstep_interval_imputed <- aggregate(activity_imputed$steps, list(interval=activity_imputed$interval, activity_imputed$wday), mean, na.rm=TRUE)
 plot_ts(meanstep_interval_imputed, "day", "wday")
 png(filename = "ts_meanstep_interval_imputed.png", width = 480, height = 480, units = "px")
